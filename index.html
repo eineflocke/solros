@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>SOLROS</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="header">
+      <span id="brand">
+        <span id="title">SOLROS</span><br>
+        <span id="version">v1.2.0+20261103</span>
+      </span>
+      <button id="togglePanel">パネル非表示</button>
+    </div>
+    <div id="panelWrapper">
+      <div id="panel">        
+        <!--<button id="toggleUrl">URL 生成</button>-->
+        <span class="sectiontitles">[ コンテンツ ]</span><br>
+        <select id="content"></select><br>
+        <table class="pmtables">
+          <tr class="slideshowControl">
+            <th>
+              <span class="textsmall">スライドショー</span> <span id="iContent"></span>/<span id="nContent"></span>
+            </th><td>
+              <button id="ssPrev">&lt;</button><button id="ssNext">&gt;</button>
+            </td>
+          </tr>
+          <tr class="videoControl">
+            <th>
+              <span class="textsmall">FPS</span> <span id="videoFps"></span>
+            </th><td>
+              <button id="videoSlower">-</button><button id="videoFaster">+</button>
+            </td>
+          </tr>
+          <tr class="videoControl">
+            <th>
+              <span class="textsmall">フレーム</span> <span id="iFrame"></span>/<span id="nFrame"></span>
+            </th><td>
+              <button id="framePrev">&lt;</button><button id="frameNext">&gt;</button>
+            </td>
+          </tr>
+        </table>
+        <div class="videoControl">
+          <button id="videoPlay"></button><input type="range" id="seekbar" min="0" max="1" step="0.000001"><br>
+        </div>
+        <br>
+        <span class="sectiontitles">[ 球体姿勢 ]</span><br>
+        <table id="latlon">
+          <tr>
+            <td class="tableright">lat = </td>
+            <td class="tableleft"><input type="text" id="lat"> [deg]</td>
+          </tr>
+          <tr>
+            <td class="tableright">lon = </td>
+            <td class="tableleft"><input type="text" id="lon"> [deg]</td>
+          </tr>
+        </table>
+        <button id="setRot">決定</button><button id="resetRot">リセット</button><br>
+        <label><input type="checkbox" id="dragRot">ドラッグで回転</label><br>
+        <table class="pmtables">
+          <tr>
+            <th>
+              <span class="textsmall">自動回転速度</span> <span id="rotSpeed"></span>
+            </th><td>
+              <button id="rotSlower">-</button><button id="rotFaster">+</button>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <span class="sectiontitles">[ 説明・注釈 ]</span><br>
+        説明文位置
+        <select id="descType">
+          <option value="descdummy">なし</option>
+          <option value="center">球上</option>
+          <option value="topright">右上</option>
+          <option value="bottomright">右下</option>
+        </select><br>
+        小⇔大<input type="range" id="descSize" min="0.2" max="1.0" step="0.05"><br>
+        上⇔下<input type="range" id="descPosY" min="5" max="85" step="5"><br>
+        左⇔右<input type="range" id="descPosX" min="-40" max="40" step="5"><br>
+        <label><input type="checkbox" id="outline">輪郭</label>
+        <label><input type="checkbox" id="equator">赤道</label>
+        <label><input type="checkbox" id="lonlats">緯経線</label><br>
+        <label><input type="checkbox" id="svg">注釈</label>
+        <label><input type="checkbox" id="coast">地球海岸線</label><br>
+        <br>
+        <span class="sectiontitles">[ 投影幾何 ]</span><br>
+        <table id="position">
+          <tr>
+            <td class="tableright">r = </td>
+            <td class="tableleft"><input type="text" id="r"> [cm]</td>
+          </tr>
+          <tr>
+            <td class="tableright">x<sub>p</sub> = </td>
+            <td class="tableleft"><input type="text" id="xp"> [cm]</td>
+          </tr>
+          <tr>
+            <td class="tableright">y<sub>p</sub> = </td>
+            <td class="tableleft"><input type="text" id="yp"> [cm]</td>
+          </tr>
+          <tr>
+            <td class="tableright">p<sub>p</sub> = </td>
+            <td class="tableleft"><input type="text" id="pp"> [deg]</td>
+          </tr>
+        </table>
+        <button id="setPos">決定</button>
+        <select id="geometry">
+          <option value="free">任意設定</option>
+        </select><br>
+        <span class="textsmall">
+          p<sub>n</sub> = <span id="pn"></span>, 
+          p<sub>s</sub> = <span id="ps"></span>, 
+          fov = <span id="fov"></span>
+        </span>
+      </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <div id="topright"></div>
+    <div id="bottomright"></div>
+    <div id="centerWrapper">
+      <div id="center"></div>
+    </div>
+    <div id="descdummy">
+      <div id="desc">
+        <div id="descTime"></div>
+        <div id="descRange"></div>
+        <progress id="progress" min="0" max="1"></progress>
+        <div id="descTitle"></div>
+        <div id="descMain"></div>
+        <div id="descSub"></div>
+      </div>
+    </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./three.module.min.js"
+        }
+      }
+    </script>
+    <!--<script src="neutralino.js"></script>-->
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
